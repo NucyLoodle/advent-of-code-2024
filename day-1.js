@@ -998,3 +998,22 @@ data = `38665   13337
     50084   16941
     79209   60704
     39667   36867`
+
+const list1 = [];
+const list2 = [];
+
+data.trim().split('\n').forEach(row => {
+    const [num1, num2] = row.trim().split(/\s+/).map(Number);
+    list1.push(num1);
+    list2.push(num2);
+});
+
+list1.sort(function(a, b){return a - b});
+list2.sort(function(a, b){return a - b});
+
+let sum = 0;
+
+for (let i = 0; i < list1.length; i++) {
+    sum += Math.abs(list1[i] - list2[i]);
+  }
+console.log(sum);
