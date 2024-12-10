@@ -1021,5 +1021,25 @@ const isSafeReport = (report) => {
 }
 
 const safeReports = reports.filter(isSafeReport);
-
 console.log(safeReports.length);
+
+// part 2 solution
+
+const canBeMadeSafe = (report) => {
+    for (let i = 0; i < report.length; i++) {
+        let modifiedReport = [];
+        for (let j = 0; j < report.length; j++) {
+            if (j !== i) {
+                modifiedReport.push(report[j]);
+            }
+        }
+        if (isSafeReport(modifiedReport)) {
+            return true;
+        }
+    }
+    return false;
+}
+
+const moreSafeReports = reports.filter(canBeMadeSafe)
+console.log(moreSafeReports.length)
+
