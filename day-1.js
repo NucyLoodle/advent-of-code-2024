@@ -1017,3 +1017,18 @@ for (let i = 0; i < list1.length; i++) {
     sum += Math.abs(list1[i] - list2[i]);
   }
 console.log(sum);
+
+// second half of puzzle
+
+const list2Count = {};
+list2.forEach(number => {
+    list2Count[number] = (list2Count[number] || 0) + 1;
+});
+
+let totalSimilarityScore = 0;
+list1.forEach(number => {
+    const frequency = list2Count[number] || 0; 
+    totalSimilarityScore += number * frequency; 
+});
+
+console.log(totalSimilarityScore);
