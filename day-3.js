@@ -19,3 +19,39 @@ for (let i = 0; i < numbers.length; i++) {
 }
 
 console.log(sum)
+
+// part 2
+
+const processMemory = (input) => {
+    const regex = /mul\(\d+,\d+\)|don't\(\)|do\(\)/g; // Matches mul(), don't(), and do() instructions
+    const matches = input.match(regex); // Extract instructions in order
+    let output = [];
+    let disabled = false; // Tracks if mul instructions are disabled
+    
+    if (!matches) return "Invalid input"; // If no matches found, return error
+  
+    for (const instruction of matches) {
+      if (instruction === "don't()") {
+        disabled = true; // Disable mul instructions
+      } else if (instruction === "do()") {
+        disabled = false; // Re-enable mul instructions
+      } else if (instruction.startsWith("mul(")) {
+        if (!disabled) {
+          // Extract numbers and compute multiplication
+          const [a, b] = instruction.match(/\d+/g).map(Number);
+          output.push(a * b);
+        }
+      }
+    }
+    
+    return output;
+  }
+
+  const validMuls = processMemory(input);
+  let result = validMuls.reduce((accumulator, currentValue) => {
+    return accumulator + currentValue
+  },0);
+  
+  console.log(result);
+
+  
